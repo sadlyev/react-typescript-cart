@@ -1,7 +1,7 @@
 import { HeaderApp } from "./Header";
 
 type NavigateProps = {
-    arg?: string
+    arg: string
 }
 export const  NavigateApp = ({arg = "user"} : NavigateProps)  => {
     
