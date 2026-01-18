@@ -1,6 +1,12 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import type { pageList } from "../Navigation"
 
-export const LoginApp = () => {
+type changePage ={
+  page: (v: pageList) => void
+}
+
+
+export const RegisterApp = ({page} : changePage) => {
 
      const [emailText, setemailText] = useState("")
   const [passwordText, setpasswordTest] = useState(undefined)
@@ -19,13 +25,27 @@ export const LoginApp = () => {
         <svg className="register_panel-icon" width="30" height="30">
           <use href="./public/img/file.svg#market-icon"></use>
         </svg>
-        <h1 className="register_panel-title">Welcome Back</h1>
+        <h1 className="register_panel-title">Create Account</h1>
         <p className="register_panel-description">
-          Sign in to your account to continue shopping
+          Sign up to start your shopping journey
         </p>
       </div>
       <form className="register_form">
         <div className="register_form-wrapper">
+           <div className="register_form-inner">
+            <span className="register_form-title">Email</span>
+            <label className="register_form-label">
+              <svg className="register_form-icon" width="20" height="20">
+                <use href="./public/img/file.svg#email-icon"></use>
+              </svg>
+              <input
+                className="register_form-input"
+                placeholder="your@example.com"
+                value={emailText}
+                onChange={handleEmailInput}
+              ></input>
+            </label>
+          </div>
           <div className="register_form-inner">
             <span className="register_form-title">Email</span>
             <label className="register_form-label">
@@ -69,7 +89,7 @@ export const LoginApp = () => {
           <span className="register_form-login-title">
             Don't have an account?
           </span>
-          <span className="register_form-login">Sign Up</span>
+          <span className="register_form-login" onClick={() => page("login")}>Sign Up</span>
         </div>
       </form>
     </div>

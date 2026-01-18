@@ -1,15 +1,18 @@
-import { HeaderApp } from "./Header";
+import { RegisterApp } from "./registration/Register"
+import { LoginApp } from "./registration/LoginIn"
+import {  useState } from "react"
 
-type NavigateProps = {
-    arg: string
-}
-export const  NavigateApp = ({arg = "user"} : NavigateProps)  => {
+export type pageList = "register" | "login"
+
+export const  NavigateApp = ()  => {
+
+    const [page, setPage] = useState("login")
     
-    switch (arg) {
-        case "user":
-            return <HeaderApp/>
-        case "admin": 
-        return <HeaderApp/>
+    switch (page) {
+        case "login":
+            return <LoginApp page={setPage}/>
+        case "register": 
+        return <RegisterApp page={setPage}/>
 
     }
 }
