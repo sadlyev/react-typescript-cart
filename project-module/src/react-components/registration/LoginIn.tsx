@@ -1,7 +1,23 @@
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
+import type { pageList } from "../Navigation";
 
+type changePage = {
+  page : (e: pageList)  => void
+}
 
-export const RegisterApp = () => {
+export const LoginApp = ({page} : changePage) => {
+
+  const EmailRef = useRef<HTMLInputElement>(null)
+
+  const PasswordRef = useRef<HTMLInputElement>(null)
+
+  function EmailFocus() {
+    EmailRef.current?.focus()
+  }
+
+  function PasswordFocus() {
+    PasswordRef.current?.focus()
+  }
 
   const [emailText, setemailText] = useState("")
   const [passwordText, setpasswordTest] = useState(undefined)
@@ -28,7 +44,7 @@ export const RegisterApp = () => {
       <form className="register_form">
         <div className="register_form-wrapper">
           <div className="register_form-inner">
-            <span className="register_form-title">Email</span>
+            <span className="register_form-title" onClick={EmailFocus}>Email</span>
             <label className="register_form-label">
               <svg className="register_form-icon" width="20" height="20">
                 <use href="./public/img/file.svg#email-icon"></use>
@@ -38,11 +54,12 @@ export const RegisterApp = () => {
                 placeholder="your@example.com"
                 value={emailText}
                 onChange={handleEmailInput}
+                ref={EmailRef}
               ></input>
             </label>
           </div>
           <div className="register_form-inner">
-            <span className="register_form-title">Password</span>
+            <span className="register_form-title" onClick={PasswordFocus}>Password</span>
             <label className="register_form-label">
               <svg className="register_form-icon" width="20" height="20">
                 <use xlinkHref="./public/img/file.svg#lock-icon"></use>
@@ -56,6 +73,7 @@ export const RegisterApp = () => {
                 placeholder="&#8901;&#8901;&#8901;&#8901;&#8901;&#8901;&#8901;&#8901;"
                 value={passwordText}
                 onChange={handlePasswordInput}
+                ref={PasswordRef}
               ></input>
             </label>
           </div>
@@ -70,7 +88,7 @@ export const RegisterApp = () => {
           <span className="register_form-login-title">
             Don't have an account?
           </span>
-          <span className="register_form-login">Sign Up</span>
+          <span className="register_form-login" onClick={() => page("register")}>Sign Up</span>
         </div>
       </form>
     </div>
